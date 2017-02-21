@@ -10,15 +10,15 @@ import java.net.URL;
  */
 public class Owner extends Thread{
 
-    private String OWNER_ID = "34662135";
+    private String OWNER_ID;
     private HttpURLConnection connection = null;
 
     public Owner(String OWNER_ID){
         this.OWNER_ID = OWNER_ID;
     }
 
-    public void process(){
-        String lastPost = "lolkek";
+    public void run(){
+        String lastPost = null;
         String lastPostNew;
         String query = String.format(Constants.LAST_WALL_POST,
                 OWNER_ID,
@@ -40,7 +40,7 @@ public class Owner extends Thread{
                     stringBuilder.append("\n");
                 }
                 lastPostNew = stringBuilder.toString();
-                if (!lastPostNew.toString().equals(lastPost)) {
+                if ((!lastPostNew.toString().equals(lastPost))&&(!lastPostNew.toString().contains("requests"))) {
                     FileWriter writer = new FileWriter(String.format(Constants.OWNER_PATH, OWNER_ID), true);
                     BufferedWriter bufferedWriter = new BufferedWriter(writer);
                     bufferedWriter.write(lastPostNew);
