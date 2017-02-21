@@ -1,5 +1,3 @@
-
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -7,16 +5,20 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class Main {
-    public static final String OWNER_ID = "34662135";
+/**
+ * Created by Krav-Ig on 21.02.2017.
+ */
+public class Owner extends Thread{
 
+    private String OWNER_ID = "34662135";
+    private HttpURLConnection connection = null;
 
-    public static void main(String[] args) {
+    public Owner(String OWNER_ID){
+        this.OWNER_ID = OWNER_ID;
+    }
 
-        HttpURLConnection connection = null;
-        Owner owner = new Owner("34662135");
-        owner.process();
-        /*String lastPost = null;
+    public void process(){
+        String lastPost = "lolkek";
         String lastPostNew;
         String query = String.format(Constants.LAST_WALL_POST,
                 OWNER_ID,
@@ -26,7 +28,7 @@ public class Main {
 
         try {
 
-            for(*//*int i = 0;i < 2; i++*//*;;){
+            for(/*int i = 0;i < 2; i++*/;;){
                 stringBuilder.delete(0,stringBuilder.length());
                 connection = (HttpURLConnection) new URL(query).openConnection();//initializing connection
                 connection.connect();//sending request
@@ -46,13 +48,13 @@ public class Main {
                     lastPost = lastPostNew;
                 }
                 Thread.sleep(1000);
-                if(lastPost.contains("бэшэнамавпа"))break;
+                //if(lastPost.contains("бэшэнамавпа"))break;
             }
         }catch (Throwable cause){
             //cause.printStackTrace();
         }finally {
             if(connection != null)
                 connection.disconnect();
-        }*/
+        }
     }
 }
