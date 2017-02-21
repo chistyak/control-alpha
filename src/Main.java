@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class Main {
     public static final String OWNER_ID = "34662135";
@@ -13,7 +14,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        HttpURLConnection connection = null;
+        ArrayList<String> list = Initializer.initialize();
+        for(String x : list) System.out.println(x);
+
         Owner owner = new Owner("34662135");
         owner.process();
         /*String lastPost = null;

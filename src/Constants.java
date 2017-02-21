@@ -7,4 +7,5 @@ public class Constants {
     public static final String LAST_WALL_POST =
             "https://api.vk.com/method/wall.get?owner_id=%1$s&access_token=%2$s&count=1";
     public static final String OWNER_PATH = "resources/id%1$s";
+    public static final String ID_LIST = "resources/idList";
 }
