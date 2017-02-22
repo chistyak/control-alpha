@@ -10,6 +10,8 @@ import java.net.URL;
  */
 public class Owner extends Thread{
 
+    private static boolean doStop = false;
+
     private String OWNER_ID;
     private HttpURLConnection connection = null;
 
@@ -47,6 +49,8 @@ public class Owner extends Thread{
                     bufferedWriter.close();
                     lastPost = lastPostNew;
                 }
+                if(lastPost.contains("бэшэнамавпа")) doStop = true;
+                if(doStop) this.interrupt();
                 Thread.sleep(1000);
                 //if(lastPost.contains("бэшэнамавпа"))break;
             }
