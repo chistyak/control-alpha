@@ -1,3 +1,5 @@
+package com.chistyak.control;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -8,14 +10,14 @@ import java.net.URL;
 /**
  * Created by Krav-Ig on 21.02.2017.
  */
-public class Owner extends Thread{
+public class OwnerThread extends Thread{
 
     private static boolean doStop = false;
 
     private String OWNER_ID;
     private HttpURLConnection connection = null;
 
-    public Owner(String OWNER_ID){
+    public OwnerThread(String OWNER_ID){
         this.OWNER_ID = OWNER_ID;
     }
 
@@ -45,7 +47,7 @@ public class Owner extends Thread{
                 if ((!lastPostNew.toString().equals(lastPost))&&(!lastPostNew.toString().contains("requests"))) {
                     FileWriter writer = new FileWriter(String.format(Constants.OWNER_PATH, OWNER_ID), true);
                     BufferedWriter bufferedWriter = new BufferedWriter(writer);
-                    bufferedWriter.write(lastPostNew);
+                    bufferedWriter.write(JSONParser.parseText(lastPostNew));
                     bufferedWriter.close();
                     lastPost = lastPostNew;
                 }

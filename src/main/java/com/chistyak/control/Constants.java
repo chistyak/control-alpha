@@ -1,3 +1,5 @@
+package com.chistyak.control;
+
 /**
  * Created by Krav-Ig on 21.02.2017.
  */

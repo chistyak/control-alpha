@@ -1,3 +1,4 @@
+package com.chistyak.control;
 
 import java.util.ArrayList;
 
@@ -8,7 +9,7 @@ public class Main {
 
         for (String str : list)
         {
-            new Owner(str).start();
+            new OwnerThread(str).start();
         }
     }
 }
