@@ -1,66 +1,52 @@
+/**
+ * each user is observed in separate thread
+ * this class realizes run() method
+ */
+
 package com.chistyak.control;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
-/**
- * Created by Krav-Ig on 21.02.2017.
- */
 public class OwnerThread extends Thread{
 
     private static boolean doStop = false;
 
     private String OWNER_ID;
-    private HttpURLConnection connection = null;
 
     public OwnerThread(String OWNER_ID){
         this.OWNER_ID = OWNER_ID;
     }
 
     public void run(){
-        String lastPost = null;
+        String lastPost = null;//this and next to save and compare different versions of last post
         String lastPostNew;
-        String query = String.format(Constants.LAST_WALL_POST,
-                OWNER_ID,
-                Constants.ACCESS_TOKEN);
-        StringBuilder stringBuilder = new StringBuilder();//to write here result of request(html doc) later
-        String line;//supporting var
-
+        Owner owner = new Owner(OWNER_ID);
+        if(!owner.isPresent())
+            owner.initialize();
         try {
-
-            for(/*int i = 0;i < 2; i++*/;;){
-                stringBuilder.delete(0,stringBuilder.length());
-                connection = (HttpURLConnection) new URL(query).openConnection();//initializing connection
-                connection.connect();//sending request
-                BufferedReader bufferedReader = new BufferedReader(
-                        new InputStreamReader(
-                                connection.getInputStream()));//streaming request result
-                while((line = bufferedReader.readLine())!= bufferedReader.readLine()){//checking if page is over
-                    stringBuilder.append(line);
-                    stringBuilder.append("\n");
-                }
-                lastPostNew = stringBuilder.toString();
+            for(;;){
+                /**
+                 * getting the last post from the wall
+                 */
+                lastPostNew = owner.getLastPost();
+                /**
+                 * saving last post to the file if it differs from previously saved lastPost
+                 */
                 if ((!lastPostNew.toString().equals(lastPost))&&(!lastPostNew.toString().contains("requests"))) {
-                    FileWriter writer = new FileWriter(String.format(Constants.OWNER_PATH, OWNER_ID), true);
-                    BufferedWriter bufferedWriter = new BufferedWriter(writer);
-                    bufferedWriter.write(JSONParser.parseText(lastPostNew));
-                    bufferedWriter.close();
+                    owner.savePost(lastPostNew);
                     lastPost = lastPostNew;
                 }
+                /**
+                 * changing value of stopping flag to true and interrupting all threads(doStop is static)
+                 */
                 if(lastPost.contains("бэшэнамавпа")) doStop = true;
                 if(doStop) this.interrupt();
+                /**
+                 * pause between checking new posts
+                 */
                 Thread.sleep(1000);
-                //if(lastPost.contains("бэшэнамавпа"))break;
             }
         }catch (Throwable cause){
-            //cause.printStackTrace();
-        }finally {
-            if(connection != null)
-                connection.disconnect();
+            cause.printStackTrace();
         }
     }
 }

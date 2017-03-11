@@ -1,8 +1,11 @@
+/**
+ * since responces from vk are i JSON
+ * the parser is needed to get separate elements of the posts
+ */
+
 package com.chistyak.control;
 import org.json.*;
-/**
- * Created by Krav-Ig on 24.02.2017.
- */
+
 public class JSONParser {
 
     public static String parseText(String Json){
