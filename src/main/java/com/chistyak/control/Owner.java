@@ -31,7 +31,8 @@ public class Owner {
 
     public void initialize(){
         try {
-            FileWriter writer = new FileWriter(String.format(Constants.OWNER_PATH, OWNER_ID));
+            FileWriter writer = new FileWriter(
+                    String.format(Constants.OWNER_PATH, OWNER_ID));
             BufferedWriter bufferedWriter = new BufferedWriter(writer);
             bufferedWriter.write(HTMLGenerator.createBasic());
             bufferedWriter.close();
@@ -48,12 +49,14 @@ public class Owner {
         String line = null;//supporting var
         try {
                 stringBuilder.delete(0, stringBuilder.length());
-                connection = (HttpURLConnection) new URL(query).openConnection();//initializing connection
+                connection = (HttpURLConnection) new URL(query)
+                        .openConnection();//initializing connection
                 connection.connect();//sending request
                 BufferedReader bufferedReader = new BufferedReader(
                         new InputStreamReader(
                                 connection.getInputStream()));//streaming request result
-                while ((line = bufferedReader.readLine()) != bufferedReader.readLine()) {//checking if page is over
+                while ((line = bufferedReader.readLine()) !=
+                        bufferedReader.readLine()) {//checking if page is over
                     stringBuilder.append(line);
                     stringBuilder.append("\n");
                 }
@@ -69,11 +72,14 @@ public class Owner {
 
         FileWriter writer = null;
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(String.format(Constants.OWNER_PATH, OWNER_ID)));
+            BufferedReader bufferedReader = new BufferedReader(
+                    new FileReader(
+                            String.format(Constants.OWNER_PATH, OWNER_ID)));
             String x = bufferedReader.readLine();
             bufferedReader.close();
             x = HTMLGenerator.insertion(x, JSONParser.parseText(string));
-            writer = new FileWriter(String.format(Constants.OWNER_PATH, OWNER_ID));
+            writer = new FileWriter(
+                    String.format(Constants.OWNER_PATH, OWNER_ID));
             BufferedWriter bufferedWriter = new BufferedWriter(writer);
             bufferedWriter.write(x);
             bufferedWriter.close();

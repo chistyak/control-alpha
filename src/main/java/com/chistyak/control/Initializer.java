@@ -16,7 +16,9 @@ public class Initializer {
         BufferedReader bufferedReader = null;
         ArrayList<String> list = new ArrayList<String>();
         try {
-            bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(Constants.RESOURCES)));
+            bufferedReader = new BufferedReader(
+                    new InputStreamReader(
+                            new FileInputStream(Constants.RESOURCES)));
             Constants.ACCESS_TOKEN = bufferedReader.readLine();
             while(bufferedReader.ready())
             list.add(bufferedReader.readLine());

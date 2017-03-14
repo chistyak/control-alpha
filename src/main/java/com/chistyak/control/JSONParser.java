@@ -10,7 +10,9 @@ public class JSONParser {
 
     public static String parseText(String Json){
         JSONObject obj = new JSONObject(Json);
-        String text = obj.getJSONArray("response").getJSONObject(1).getString("text");
+        String text = obj.getJSONArray("response")
+                .getJSONObject(1)
+                .getString("text");
         return text;
     }
 

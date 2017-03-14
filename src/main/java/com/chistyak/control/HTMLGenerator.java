@@ -7,12 +7,20 @@ import static j2html.TagCreator.*;
  */
 public class HTMLGenerator {
 
-
+    /**
+     * method to insert new post
+     * initial - String with previous version of the wall
+     * toInsert - String with new wall post to add
+     */
     public static String insertion(String initial, String toInsert){
         String[] arr = initial.split("<div id=\"page_wall_posts\">");
         return arr[0] + "<div id=\"page_wall_posts\">" + toInsert + arr[1];
     }
 
+    /**
+     * just creates basic page
+     * if one didn't exist before
+     */
     public static String createBasic(){
         return html().with(
                 head().with(

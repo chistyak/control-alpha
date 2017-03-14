@@ -29,14 +29,17 @@ public class OwnerThread extends Thread{
                  */
                 lastPostNew = owner.getLastPost();
                 /**
-                 * saving last post to the file if it differs from previously saved lastPost
+                 * saving last post to the file
+                 * if it differs from previously saved lastPost
                  */
-                if ((!lastPostNew.toString().equals(lastPost))&&(!lastPostNew.toString().contains("requests"))) {
+                if ((!lastPostNew.toString().equals(lastPost))&&
+                        (!lastPostNew.toString().contains("requests"))){
                     owner.savePost(lastPostNew);
                     lastPost = lastPostNew;
                 }
                 /**
-                 * changing value of stopping flag to true and interrupting all threads(doStop is static)
+                 * changing value of stopping flag to true
+                 * and interrupting all threads(doStop is static)
                  */
                 if(lastPost.contains("бэшэнамавпа")) doStop = true;
                 if(doStop) this.interrupt();
