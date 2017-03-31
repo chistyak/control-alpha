@@ -1,6 +1,6 @@
 /**
  * each user is observed in separate thread
- * this class realizes run() method
+ * class to realize this
  */
 
 package com.chistyak.control;
@@ -41,7 +41,7 @@ public class OwnerThread extends Thread{
                  * changing value of stopping flag to true
                  * and interrupting all threads(doStop is static)
                  */
-                if(lastPost.contains("бэшэнамавпа")) doStop = true;
+                if(lastPost.contains(Constants.STOPPING_MESSAGE)) doStop = true;
                 if(doStop) this.interrupt();
                 /**
                  * pause between checking new posts

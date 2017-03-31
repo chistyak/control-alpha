@@ -28,4 +28,8 @@ public class Constants {
      * with all needed resources
      */
     public static final String RESOURCES = "resources/resources";
+    /**
+     * message to enter to stop program
+     */
+    public static final String STOPPING_MESSAGE = "STOP";
 }

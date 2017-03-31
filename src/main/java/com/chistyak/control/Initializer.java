@@ -8,13 +8,20 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Initializer {
-
-
-    public static ArrayList<String> initialize() {
+    /**
+     * read access token from resources/resources
+     * write it to Constants
+     *
+     * read IDs of users to observe
+     * @return list of id's
+     */
+    public static List<String> initialize() {
         BufferedReader bufferedReader = null;
-        ArrayList<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<String>();
         try {
             bufferedReader = new BufferedReader(
                     new InputStreamReader(
@@ -25,7 +32,7 @@ public class Initializer {
             return list;
         }catch (Exception e){
             e.printStackTrace();
-            return null;
+            return Collections.EMPTY_LIST;
         }
     }
 }

@@ -8,6 +8,6 @@ public class InitializerTest {
 
     @Test
     public void testInitialize() throws Exception {
-        assertTrue(!Initializer.initialize().equals(null));
+        assertFalse(Initializer.initialize().isEmpty());
     }
 }

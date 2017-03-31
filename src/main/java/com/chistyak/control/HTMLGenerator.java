@@ -3,23 +3,38 @@ package com.chistyak.control;
 import static j2html.TagCreator.*;
 
 /**
- * Created by Krav-Ig on 26.02.2017.
+ * insertionToHTML isn't ready
+ *
+ * class to work with html format
  */
 public class HTMLGenerator {
 
     /**
      * method to insert new post
-     * initial - String with previous version of the wall
-     * toInsert - String with new wall post to add
+     * @param initial String with previous version of the wall
+     * @param toInsert String with new wall post to add
+     * @return resulting version of the wall
      */
     public static String insertion(String initial, String toInsert){
         String[] arr = initial.split("<div id=\"page_wall_posts\">");
-        return arr[0] + "<div id=\"page_wall_posts\">" + toInsert + arr[1];
+        return arr[0] +
+                "<div id=\"page_wall_posts\">" +
+                insertionToHTML(toInsert) + arr[1];
+    }
+
+    /**
+     * create html fragment for given text
+     * @param insert text of new wall post
+     * @return  html-version of post
+     */
+    public static String insertionToHTML(String insert){
+        return insert;
     }
 
     /**
      * just creates basic page
      * if one didn't exist before
+     * @return html of default page, without any post
      */
     public static String createBasic(){
         return html().with(
